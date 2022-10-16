@@ -14,6 +14,7 @@ app.use(
 );
 
 app.get('/',function(req,res){
+	console.log("Home Page ------------------------->>")
 	res.sendFile(__dirname + "/index.html");
 });
 
