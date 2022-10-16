@@ -1,0 +1,85 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>LINUX !</title>
+    <style>
+     body {
+  background: #111;
+  color: #411;
+  font-family: Consolas, Courier, monospace;
+  font-size: 60px;
+  text-shadow: 0 0 15px #411;
+  height: 100%;
+}
+
+div {
+  position: relative;
+  top: 50%;
+  margin: -30px auto;
+  text-align: center;
+}
+
+.glow {
+  color: #e450109a;
+  text-shadow: 0px 0px 10px #c93c0d;
+}
+
+span {
+  display: inline-block;
+  padding: 0 10px;
+}
+    </style>
+  </head>
+  <body>
+    <div id="loading">UBUNTU</div>
+  </body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    let alphabet = new Array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0");
+    letter_count = 0;
+    el = $("#loading");
+    word = el.html().trim();
+    finished = false;
+
+    el.html("");
+    for (var i = 0; i < word.length; i++) {
+        el.append("<span>" + word.charAt(i) + "</span>");
+    }
+
+    setTimeout(write, 75);
+    incrementer = setTimeout(inc, 1000);
+
+    function write() {
+        for (var i = letter_count; i < word.length; i++) {
+            var c = Math.floor(Math.random() * 36);
+            $("span")[i].innerHTML = alphabet[c];
+        }
+        if (!finished) {
+            setTimeout(write, 75);
+        }
+    }
+
+    function inc() {
+        $("span")[letter_count].innerHTML = word[letter_count];
+        $("span:eq(" + letter_count + ")").addClass("glow");
+        letter_count++;
+        if (letter_count >= word.length) {
+            finished = true;
+            setTimeout(reset, 1500);
+        } else {
+            setTimeout(inc, 1000);
+        }
+    }
+
+    function reset() {
+        letter_count = 0;
+        finished = false;
+        setTimeout(inc, 1000);
+        setTimeout(write, 75);
+        $("span").removeClass("glow");
+    }
+</script>
